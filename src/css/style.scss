@@ -103,6 +103,17 @@ html, body, #root{
             display: flex;
             gap: 10px;
             height: fit-content;
+            justify-content: center;
+            width: 100%;
+
+            @media screen and (max-width: 400px) {
+                flex-direction: column;
+
+                .rhymes-ipt{
+                    min-width: 50px !important;
+                    
+                }
+            }
 
             .rhymes-ipt{
                 height: 100%;
@@ -111,13 +122,14 @@ html, body, #root{
                 appearance: none;
                 outline: none;
                 font-size: 30px;
+                min-width: 100px;
                 
             }
 
             .rhymes-btn{
                 background-color: #e22f24;
                 color: white;
-                width: fit-content;
+                width: auto;
                 padding: 9px 19px;
                 user-select: none;
                 border: none;
@@ -136,12 +148,14 @@ html, body, #root{
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
+            word-wrap: break-word;
 
-            div{
+            .word{
                 padding: 2px 5px;
                 font-size: 20px;
                 border: 1px solid #ced4da;
                 background-color: #f8f9fa ;
+                word-wrap: break-word;
             }
         }
     }

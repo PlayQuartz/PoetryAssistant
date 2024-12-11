@@ -15,7 +15,7 @@ const Rhymes = ({dictionary}) => {
         let rhyming_words = new Set()
         let word_phonetic = getPhonetic(word)
         if(!word_phonetic){
-            return console.log('Not Found')
+            return setRhymingWords(false)
         }
         word_phonetic = getPhonetic(word).split(' ')
         let word_phonetic_len = word_phonetic.length
@@ -43,20 +43,22 @@ const Rhymes = ({dictionary}) => {
                 }
             }
         }
-        setRhymingWords(rhyming_words)
-        return rhyming_words
+        if(Array.from(rhyming_words).length === 0){
+            return setRhymingWords(false)
+        }
+        return setRhymingWords(rhyming_words)
     }
 
     return (
         <div className='rhymes-container'>
             <div className='search-bar'>
                 <input className='rhymes-ipt' type='text' onChange={(e) => setSearchWord(e.target.value)} />
-                <input className='rhymes-btn' type='submit' onClick={getRhymes} value='Find Rhymes' />
+                <input className='rhymes-btn' type='submit' onClick={getRhymes} value='Search' />
             </div>
 
             <div className='rhyming-words'>
                 {
-                    rhymingWords && Array.from(rhymingWords).map(word => (<div>{word}</div>))
+                    rhymingWords !== null ? rhymingWords !== false ? Array.from(rhymingWords).map((word, index) => (<div key={index} className='word'>{word}</div>)) : (<div>Not Found</div>) : <></>
                 }
             </div>
         </div>
