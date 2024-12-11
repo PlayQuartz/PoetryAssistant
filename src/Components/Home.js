@@ -14,6 +14,17 @@ const Home = () => {
 
     return (
         <div className='home-page'>
+
+            <header>
+                <img className='logo' src='/logo.jpg' />
+                <div className='menu-page'>
+                    <div className='page'>Rhymes</div>
+                    <div className='page'>Meter</div>
+                    <div className='page'>Alliteration</div>
+                </div>
+            </header>
+            <div className='banner'>Poetry Assistant</div>
+
             <Rhymes dictionary={dictionary}/>
         </div>
     )

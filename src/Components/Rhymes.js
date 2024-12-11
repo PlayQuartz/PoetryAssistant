@@ -10,7 +10,7 @@ const Rhymes = ({dictionary}) => {
     };
 
     const getRhymes = () => {
-        let word = searchWord
+        let word = searchWord.toLowerCase()
         let dictionary_keys = Object.keys(dictionary)
         let rhyming_words = new Set()
         let word_phonetic = getPhonetic(word)
@@ -49,8 +49,11 @@ const Rhymes = ({dictionary}) => {
 
     return (
         <div className='rhymes-container'>
-            <input type='text' onChange={(e) => setSearchWord(e.target.value)} />
-            <button onClick={getRhymes}>Find Rhymes</button>
+            <div className='search-bar'>
+                <input className='rhymes-ipt' type='text' onChange={(e) => setSearchWord(e.target.value)} />
+                <input className='rhymes-btn' type='submit' onClick={getRhymes} value='Find Rhymes' />
+            </div>
+
             <div className='rhyming-words'>
                 {
                     rhymingWords && Array.from(rhymingWords).map(word => (<div>{word}</div>))

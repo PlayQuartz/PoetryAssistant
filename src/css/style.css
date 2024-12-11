@@ -3,12 +3,127 @@ html, body, #root {
   width: 100%;
   padding: 0;
   margin: 0;
+  font-family: "DM Sans";
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .home-page {
   height: 100%;
   width: 100%;
+}
+.home-page header {
+  height: 15vh;
+  min-height: 50px;
+  max-height: 200px;
+  padding: 20px 15%;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.home-page header .logo {
+  height: 70%;
+}
+@media screen and (max-width: 275px) {
+  .home-page header .logo {
+    height: auto;
+    width: 100%;
+  }
+}
+.home-page header .menu-page {
+  display: flex;
+  margin-left: auto;
+  gap: 15px;
+}
+@media screen and (max-width: 720px) {
+  .home-page header .menu-page {
+    display: none;
+  }
+}
+.home-page header .menu-page .page {
+  position: relative;
+  color: #1b153e;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 17.5px;
+}
+.home-page header .menu-page .page::before {
+  left: 50%;
+  bottom: 0;
+}
+.home-page header .menu-page .page::after {
+  right: 50%;
+  bottom: 0;
+}
+.home-page header .menu-page .page::after, .home-page header .menu-page .page::before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 0;
+  background-color: #e22f24;
+  transition: width 0.3s ease-in-out;
+}
+.home-page header .menu-page .page:hover::after, .home-page header .menu-page .page:hover::before {
+  width: 50%;
+}
+.home-page .banner {
+  width: 100%;
+  background-color: #1B153E;
+  font-size: 50px;
+  font-weight: 800;
+  color: white;
+  padding: 20px 15%;
+  word-wrap: break-word;
+  user-select: none;
+}
+.home-page .rhymes-container {
+  padding: 50px 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+.home-page .rhymes-container .search-bar {
+  display: flex;
+  gap: 10px;
+  height: fit-content;
+}
+.home-page .rhymes-container .search-bar .rhymes-ipt {
+  height: 100%;
+  padding: 9px 19px;
+  border: 1px solid #ced4da;
+  appearance: none;
+  outline: none;
+  font-size: 30px;
+}
+.home-page .rhymes-container .search-bar .rhymes-btn {
+  background-color: #e22f24;
+  color: white;
+  width: fit-content;
+  padding: 9px 19px;
+  user-select: none;
+  border: none;
+  cursor: pointer;
+  font-family: "DM Sans";
+  font-size: 25px;
+}
+.home-page .rhymes-container .search-bar .rhymes-btn:hover {
   background-color: black;
+}
+.home-page .rhymes-container .rhyming-words {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.home-page .rhymes-container .rhyming-words div {
+  padding: 2px 5px;
+  font-size: 20px;
+  border: 1px solid #ced4da;
+  background-color: #f8f9fa;
 }
 
 /*# sourceMappingURL=style.css.map */
