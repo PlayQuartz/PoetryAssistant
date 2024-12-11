@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/PoetryAssistant/static/css/main.b2af19b1.css",
-    "main.js": "/PoetryAssistant/static/js/main.10fd5a5a.js",
+    "main.js": "/PoetryAssistant/static/js/main.a46ca705.js",
     "index.html": "/PoetryAssistant/index.html",
     "main.b2af19b1.css.map": "/PoetryAssistant/static/css/main.b2af19b1.css.map",
-    "main.10fd5a5a.js.map": "/PoetryAssistant/static/js/main.10fd5a5a.js.map"
+    "main.a46ca705.js.map": "/PoetryAssistant/static/js/main.a46ca705.js.map"
   },
   "entrypoints": [
     "static/css/main.b2af19b1.css",
-    "static/js/main.10fd5a5a.js"
+    "static/js/main.a46ca705.js"
   ]
 }
