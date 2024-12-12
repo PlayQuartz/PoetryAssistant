@@ -43,6 +43,12 @@ html, body, #root{
                 display: none;
             }
         
+            .selected{
+                &::after, &::before{
+                    width: 50% !important;
+                }
+            }
+
             .page{
                 position: relative;
                 color: #1b153e;
@@ -68,6 +74,8 @@ html, body, #root{
                     background-color: #e22f24;
                     transition: width 0.3s ease-in-out;
                 }
+
+                
 
                 &:hover{
                     &::after, &::before{

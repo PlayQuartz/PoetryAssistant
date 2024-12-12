@@ -43,6 +43,9 @@ html, body, #root {
     display: none;
   }
 }
+.home-page header .menu-page .selected::after, .home-page header .menu-page .selected::before {
+  width: 50% !important;
+}
 .home-page header .menu-page .page {
   position: relative;
   color: #1b153e;

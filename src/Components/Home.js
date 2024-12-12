@@ -6,6 +6,7 @@ import Meter from './Meter.js'
 const Home = () => {
 
     const [dictionary, setDictionary] = useState(null)
+    const [page, setPage] = useState(null)
 
     useEffect(() => {
         fetch(`${process.env.PUBLIC_URL}/dictionary.json`)
@@ -17,16 +18,16 @@ const Home = () => {
         <div className='home-page'>
 
             <header>
-                <img className='logo' src={`${process.env.PUBLIC_URL}/logo.jpg`} />
+                <img className='logo' src={`${process.env.PUBLIC_URL}/logo.jpg`} alt='logo' />
                 <div className='menu-page'>
-                    <div className='page'>Rhymes</div>
-                    <div className='page'>Meter</div>
-                    <div className='page'>Alliteration</div>
+                    <div style={{}} onClick={() => setPage(<Rhymes dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Rhymes' ? 'selected' : ''}`}>Rhymes</div>
+                    <div onClick={() => setPage(<Meter dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Meter' ? 'selected' : ''}`}>Meter</div>
+                    <div className={`page ${page?.type?.name === 'Alliteration' ? 'selected' : ''}`} >Alliteration</div>
                 </div>
             </header>
             <div className='banner'>Poetry Assistant</div>
 
-            <Meter dictionary={dictionary}/>
+            {page}
         </div>
     )
 }
