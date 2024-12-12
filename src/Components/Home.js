@@ -2,6 +2,7 @@ import '../css/style.css'
 import React, {useState, useEffect} from 'react'
 import Rhymes from './Rhymes.js'
 import Meter from './Meter.js'
+import Alliteration from './Alliteration.js'
 
 const Home = () => {
 
@@ -20,9 +21,9 @@ const Home = () => {
             <header>
                 <img className='logo' src={`${process.env.PUBLIC_URL}/logo.jpg`} alt='logo' />
                 <div className='menu-page'>
-                    <div style={{}} onClick={() => setPage(<Rhymes dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Rhymes' ? 'selected' : ''}`}>Rhymes</div>
+                    <div onClick={() => setPage(<Rhymes dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Rhymes' ? 'selected' : ''}`}>Rhymes</div>
                     <div onClick={() => setPage(<Meter dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Meter' ? 'selected' : ''}`}>Meter</div>
-                    <div className={`page ${page?.type?.name === 'Alliteration' ? 'selected' : ''}`} >Alliteration</div>
+                    <div onClick={() => setPage(<Alliteration dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Alliteration' ? 'selected' : ''}`} >Alliteration</div>
                 </div>
             </header>
             <div className='banner'>Poetry Assistant</div>

@@ -8,6 +8,7 @@ html, body, #root {
 
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 
 .home-page {
@@ -82,14 +83,22 @@ html, body, #root {
   word-wrap: break-word;
   user-select: none;
 }
-.home-page .rhymes-container {
+.home-page .container {
   padding: 50px 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 50px;
 }
-.home-page .rhymes-container .search-bar {
+.home-page .container .information {
+  align-self: baseline;
+  user-select: none;
+}
+.home-page .container .information .title {
+  font-size: 35px;
+  font-weight: 700;
+}
+.home-page .container .search-bar {
   display: flex;
   gap: 10px;
   height: fit-content;
@@ -97,14 +106,14 @@ html, body, #root {
   width: 100%;
 }
 @media screen and (max-width: 400px) {
-  .home-page .rhymes-container .search-bar {
+  .home-page .container .search-bar {
     flex-direction: column;
   }
-  .home-page .rhymes-container .search-bar .rhymes-ipt {
+  .home-page .container .search-bar .rhymes-ipt {
     min-width: 50px !important;
   }
 }
-.home-page .rhymes-container .search-bar .rhymes-ipt {
+.home-page .container .search-bar .ipt {
   height: 100%;
   padding: 9px 19px;
   border: 1px solid #ced4da;
@@ -113,7 +122,7 @@ html, body, #root {
   font-size: 30px;
   min-width: 100px;
 }
-.home-page .rhymes-container .search-bar .rhymes-btn {
+.home-page .container .search-bar .btn {
   background-color: #e22f24;
   color: white;
   width: auto;
@@ -124,22 +133,35 @@ html, body, #root {
   font-family: "DM Sans";
   font-size: 25px;
 }
-.home-page .rhymes-container .search-bar .rhymes-btn:hover {
+.home-page .container .search-bar .btn:hover {
   background-color: black;
 }
-.home-page .rhymes-container .rhyming-words {
+.home-page .container .words {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   word-wrap: break-word;
 }
-.home-page .rhymes-container .rhyming-words .word {
+.home-page .container .words .word {
   padding: 2px 5px;
   font-size: 20px;
   border: 1px solid #ced4da;
   background-color: #f8f9fa;
   word-wrap: break-word;
+}
+.home-page .container .words .sentence {
+  display: grid;
+  column-gap: 10px;
+}
+.home-page .container .words .sentence div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-page .container .words .sentence div.meter {
+  font-weight: 100;
+  font-size: 35px;
 }
 
 /*# sourceMappingURL=style.css.map */
