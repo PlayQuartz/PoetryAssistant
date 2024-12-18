@@ -21,7 +21,7 @@ const Home = () => {
             <header>
                 <img className='logo' src={`${process.env.PUBLIC_URL}/logo.jpg`} alt='logo' />
                 <div className='menu-page'>
-                    <div onClick={() => setPage(<Rhymes dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Rhymes' ? 'selected' : ''}`}>Rhymes</div>
+                    <div onClick={() => setPage(<Rhymes phonetic_dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Rhymes' ? 'selected' : ''}`}>Rhymes</div>
                     <div onClick={() => setPage(<Meter dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Meter' ? 'selected' : ''}`}>Meter</div>
                     <div onClick={() => setPage(<Alliteration dictionary={dictionary}/>)} className={`page ${page?.type?.name === 'Alliteration' ? 'selected' : ''}`} >Alliteration</div>
                 </div>

@@ -1,52 +1,52 @@
 import React, {useState} from 'react'
 
-const Rhymes = ({dictionary}) => {
+const Rhymes = ({phonetic_dictionary}) => {
 
     const [searchWord, setSearchWord] = useState('')
     const [rhymingWords, setRhymingWords] = useState(null)
 
-    const getPhonetic = (word) => {
-        return dictionary[word];
-    };
+    const getRhymes = (searchWord, phonetic_dictionary) => {
 
-    const getRhymes = () => {
-        let word = searchWord.toLowerCase()
-        let dictionary_keys = Object.keys(dictionary)
-        let rhyming_words = new Set()
-        let word_phonetic = getPhonetic(word)
+        var word = searchWord.toLowerCase()
+        var word_phonetic = phonetic_dictionary[word]
+        var rhyming_words = []
+        var dictionary_keys = Object.keys(phonetic_dictionary)
+
         if(!word_phonetic){
-            return setRhymingWords(false)
+            return rhyming_words
         }
-        word_phonetic = getPhonetic(word).split(' ')
-        let word_phonetic_len = word_phonetic.length
+
+        word_phonetic = word_phonetic.split(' ')
+        var word_phonetic_len = word_phonetic.length
 
         for(let x = 0; x < dictionary_keys.length; x++){
-            let current_word = dictionary_keys[x]
-            let current_word_phonetic = getPhonetic(current_word)
-            if(current_word_phonetic){
-                current_word_phonetic = getPhonetic(current_word).split(' ')
-                
-                let current_word_phonetic_len = current_word_phonetic.length
-                let word_position = word_phonetic_len-1
-                for(let y = current_word_phonetic_len-1; y >= (word_phonetic_len >= current_word_phonetic_len ? 0 : current_word_phonetic_len-word_phonetic_len); y--){
-                    if(current_word_phonetic[y] === word_phonetic[word_position]){
-                        if(word_phonetic_len-word_position >= 2){
-                            if(current_word !== word){
-                                rhyming_words.add(current_word)
+
+            var current_word = dictionary_keys[x]
+            var current_word_phonetic = phonetic_dictionary[current_word]
+
+            if(current_word){
+
+                current_word_phonetic = current_word_phonetic.split(' ')
+                var current_word_phonetic_len = current_word_phonetic.length
+
+                for(let y = 1; y <= Math.min(current_word_phonetic_len, word_phonetic_len); y++){
+                    if(current_word_phonetic[current_word_phonetic_len-y] === word_phonetic[word_phonetic_len-y]){
+                        if(y >= 2){
+                            if (current_word !== word){
+                                rhyming_words.push(current_word)
                             }
                         }
                     }
                     else{
                         break
                     }
-                    word_position--
                 }
+
             }
+
         }
-        if(Array.from(rhyming_words).length === 0){
-            return setRhymingWords(false)
-        }
-        return setRhymingWords(rhyming_words)
+
+        return rhyming_words
     }
 
     return (
@@ -59,7 +59,7 @@ const Rhymes = ({dictionary}) => {
 
             <div className='search-bar'>
                 <input className='ipt' type='text' placeholder='Word' onChange={(e) => setSearchWord(e.target.value)} />
-                <input className='btn' type='submit' onClick={getRhymes} value='Search' />
+                <input className='btn' type='submit' onClick={() => {setRhymingWords(getRhymes(searchWord, phonetic_dictionary))}} value='Search' />
             </div>
 
             <div className='words'>
