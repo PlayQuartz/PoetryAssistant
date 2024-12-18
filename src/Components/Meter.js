@@ -6,27 +6,22 @@ const Meter = ({dictionary}) => {
     const [searchSentence, setSearchSentence] = useState('')
     const [meterSequence, setMeterSequence] = useState(null)
 
-    const getPhonetic = (word) => {
-        return dictionary[word];
-    };
-
-    const getMeter = () => {
-        let sentence_list = searchSentence.replaceAll('.', '').replaceAll(',', '').split(' ')
-        let meter_sentence = []
-        for(let word in sentence_list){
-            let meter = ' '
-            let lower_case_word = sentence_list[word].toLowerCase()
-            let phonetic_word = getPhonetic(lower_case_word)
-            for(let c in phonetic_word){
-                if(phonetic_word[c] in ['0','1','2']){
-                    meter+= {'0':'´', '1': '˘', '2': '˘'}[phonetic_word[c]]
+    const getMeter = (searchSentence, phonetic_dictionary) => {
+        var sentence = searchSentence.replaceAll('.', '').replaceAll(',', '').split(' ')
+        var meter = []
+        for (let x = 0; x < sentence.length; x++){
+            var current_meter = ''
+            var current_word = sentence[x].toLowerCase()
+            var current_word_phonetic = phonetic_dictionary[current_word]
+            for (let y = 0; y < current_word_phonetic.length; y++){
+                if(current_word_phonetic[y] in ['0','1','2']){
+                    current_meter += {'0':'´', '1': '˘', '2': '˘'}[current_word_phonetic[y]]
                 }
             }
-            meter_sentence.push(meter)
+            meter.push(current_meter)
         }
-        console.log(sentence_list)
-        return setMeterSequence(meter_sentence)
-    } 
+        return meter
+    }
 
     return (
         <div className='container'>
@@ -38,7 +33,7 @@ const Meter = ({dictionary}) => {
 
             <div className='search-bar'>
                 <input className='ipt' type='text' placeholder='Sentence' onClick={() => setMeterSequence(null)} onChange={(e) => setSearchSentence(e.target.value)} />
-                <input className='btn' type='submit' onClick={getMeter} value='Search' />
+                <input className='btn' type='submit' onClick={() => {setMeterSequence(getMeter(searchSentence, dictionary))}} value='Search' />
             </div>
 
             <div className='words'>
