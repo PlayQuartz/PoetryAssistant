@@ -1,0 +1,73 @@
+function getRhymes(search_word, phonetic_dictionary)
+
+	word ← LOWERCASE(search_word) // Convert word to lowercase to match phonetic_dictionary keys
+ 	word_phonetic ← phonetic_dictionary[word] // Retrieve phonetic representation of the word
+	rhyming_words ← new DynamicArray // List to store rhyming words
+	dictionary_keys ← KEYS(phonetic_dictionary) // Get all words from phonetic_dictionary
+	
+	if word_phonetic = false then // Return empty list if word is not in phonetic_dictionary
+		return rhyming_words
+	end if
+	word_phonetic ← SPLIT(word_phonetic, " ") // Split word's phonetic into a list
+	word_phonetic_len ← LENGTH(word_phonetic) // Get number of phonemes in the word
+
+	for 0 <= x < LENGTH(dictionary_keys) do // Iterate through all words in phonetic_dictionary
+		current_word ← dictionary_keys[x] // Current word being compared
+		current_word_phonetic ← SPLIT(phonetic_dictionary[current_word] , " ") // Split current word's phonetic into a list
+		current_word_phonetic_len ← LENGTH(current_word_phonetic) // Get number of phonemes in the current word
+		for 1 <= y <= MIN(current_word_phonetic_len, word_phonetic_len) do // Compare phonemes from the end of both words
+			if current_word_phonetic[current_word_phonetic_len-y] = word_phonetic[word_phonetic_len-y] then // Check if phonemes match
+				if y >= 2 then // Ensure at least two matching phonemes
+					if current_word ≠ word then // Exclude the search word itself
+						APPEND(rhyming_words, current_word) // Add current word to rhyming_words
+					end if
+				end if
+			else
+				break // Stop comparison if phonemes don't match
+			end if
+		end for
+	end for
+	
+	return rhyming_words
+end function
+
+function getMetre(search_sentence, phonetic_dictionary)
+	sentence ← SPLIT(REPLACE(REPLACE(search_sentence, ".", ""), ",", ""), " ") // Clean the sentence by removing '.' and ',' and split it into individual words
+	metre ← new DynamicArray // List to store metre
+	for 0 <= x < LENGTH(sentence) do // Iterate through all words in the sentence
+		current_metre ← "" // String to store metre for the current word
+		current_word ← LOWERCASE(sentence[x]) // Convert word to lowercase to match phonetic_dictionary keys
+		current_word_phonetic ← phonetic_dictionary[current_word] // Retrieve phonetic representation of the word
+		if current_word_phonetic then // Check if the phonetic representation exists
+			for 0 <= y < LENGTH(current_word_phonetic) do // Iterate through the phonetic representation of the current word
+				if current_word_phonetic[y] IN ["0", "1", "2"] then // Check if the current character in the phonetic is '0', '1', or '2'
+					current_metre ← current_metre + {"0": "´", "1": "˘", "2": "˘"}[c] // Map the phoneme ('0', '1', '2') to the corresponding metre symbol
+				end if
+			end for
+		end if
+		APPEND(metre, current_metre) // Add current metre to metre
+	end for
+	return metre
+end function
+
+function getAlliteration(search_word, phonetic_dictionary)
+	word ← LOWERCASE(search_word) // Convert word to lowercase to match phonetic_dictionary keys
+	word_phonetic ← phonetic_dictionary[word] // Retrieve phonetic representation of the word
+	alliteration_words ← new DynamicArray // List to store alliteration words
+	dictionary_keys ← KEYS(phonetic_dictionary) // Get all words from phonetic_dictionary
+	if word_phonetic = false then // Return empty list if word is not in phonetic_dictionary
+		return alliteration_word
+	end if
+	word_first_phoneme ← SPLIT(word_phonetic)[0] // Get the first phoneme of the search word
+	for 0 <= x <= LENGTH(dictionary_keys) do // Iterate through all words in phonetic_dictionary
+		current_word_phonetic = phonetic_dictionary[dictionary_keys[x]] // Retrieve the phonetic representation of the current word
+		if current_word_phonetic then // Check if the phonetic representation exists	
+			current_word_first_phoneme ← SPLIT(current_word_phonetic)[0] // Get the first phoneme of the current word
+			if current_word_first_phoneme = word_first_phoneme then // Compare the first phoneme of the current word with the search word
+				APPEND(alliteration_words, dictionary_keys[x]) // Add the current word to the alliteration list
+			end if
+		end if
+	end for
+	return alliteration_words
+end function
+
