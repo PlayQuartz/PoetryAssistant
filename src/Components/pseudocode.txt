@@ -41,7 +41,7 @@ function getMetre(search_sentence, phonetic_dictionary)
 		if current_word_phonetic then // Check if the phonetic representation exists
 			for 0 <= y < LENGTH(current_word_phonetic) do // Iterate through the phonetic representation of the current word
 				if current_word_phonetic[y] IN ["0", "1", "2"] then // Check if the current character in the phonetic is '0', '1', or '2'
-					current_metre ← current_metre + {"0": "´", "1": "˘", "2": "˘"}[c] // Map the phoneme ('0', '1', '2') to the corresponding metre symbol
+					current_metre ← current_metre + {"0": "´", "1": "˘", "2": "˘"}[current_word_phonetic[y]] // Map the phoneme ('0', '1', '2') to the corresponding metre symbol
 				end if
 			end for
 		end if
@@ -56,7 +56,7 @@ function getAlliteration(search_word, phonetic_dictionary)
 	alliteration_words ← new DynamicArray // List to store alliteration words
 	dictionary_keys ← KEYS(phonetic_dictionary) // Get all words from phonetic_dictionary
 	if word_phonetic = false then // Return empty list if word is not in phonetic_dictionary
-		return alliteration_word
+		return alliteration_words
 	end if
 	word_first_phoneme ← SPLIT(word_phonetic)[0] // Get the first phoneme of the search word
 	for 0 <= x <= LENGTH(dictionary_keys) do // Iterate through all words in phonetic_dictionary
