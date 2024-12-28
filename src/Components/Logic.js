@@ -2,7 +2,7 @@ const getRhymes = (search_word, phonetic_dictionary) => {
 
     var word = search_word.toLowerCase() // Convert word to lowercase to match phonetic_dictionary keys
     var word_phonetic = phonetic_dictionary[word] // Retrieve phonetic representation of the word
-    var rhyming_words = [] // List to store rhyming words
+    var rhyming_words = {} // List to store rhyming words
     var dictionary_keys = Object.keys(phonetic_dictionary) // Get all words from phonetic_dictionary
 
     if(!word_phonetic){ // Return empty list if word is not in phonetic_dictionary
@@ -16,10 +16,13 @@ const getRhymes = (search_word, phonetic_dictionary) => {
         var current_word_phonetic = phonetic_dictionary[current_word].split(' ') // Split current word's phonetic into a list
         var current_word_phonetic_len = current_word_phonetic.length // Get number of phonemes in the current word
         for(let y = 1; y <= Math.min(current_word_phonetic_len, word_phonetic_len); y++){ // Compare phonemes from the end of both words
-            if(current_word_phonetic[current_word_phonetic_len-y] === word_phonetic[word_phonetic_len-y]){ // Check if phonemes match
+            if(current_word_phonetic[current_word_phonetic_len-y].replace(/[012]/g, '') === word_phonetic[word_phonetic_len-y].replace(/[012]/g, '')){ // Check if phonemes match
                 if(y >= 2){ // Ensure at least two matching phonemes
                     if (current_word !== word){ // Exclude the search word itself
-                        rhyming_words.push(current_word) // Add current word to rhyming_words
+                        if(!rhyming_words[y]){
+                            rhyming_words[y] = []
+                        }
+                        rhyming_words[y].push(current_word)
                     }
                 }
             }
@@ -28,8 +31,10 @@ const getRhymes = (search_word, phonetic_dictionary) => {
             }
         }
     }
+    console.log(rhyming_words)
     return rhyming_words 
 }
+
 
 const getMetre = (search_sentence, phonetic_dictionary) => {
     var sentence = search_sentence.replaceAll('.', '').replaceAll(',', '').split(' ') // Clean the sentence by removing '.' and ',' and split it into individual words
@@ -80,6 +85,6 @@ module.exports = {
 // +-- Test Program Logic without Interface --+ //
 
 // const phoneticDictionary = require('../../public/dictionary.json');
-// console.log(getRhymes('Cat', phoneticDictionary))
-// console.log(getMetre("Shall I compare thee to a summer's day", phoneticDictionary).join(' '))
-// console.log(getAlliteration('Peach', phoneticDictionary))
+// console.log(getRhymes('Shall', phoneticDictionary))
+// console.log(getMetre("I wandered lonely as a cloud", phoneticDictionary).join(' '))
+// console.log(getAlliteration('Feathers', phoneticDictionary))

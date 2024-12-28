@@ -12,7 +12,7 @@ const Home = () => {
     useEffect(() => {
         fetch(`${process.env.PUBLIC_URL}/dictionary.json`)
         .then(response => response.json())
-        .then(data => setDictionary(data))
+        .then(data => {setDictionary(data); setPage(<Rhymes phonetic_dictionary={data}/>)})
     }, [])
 
     return (
