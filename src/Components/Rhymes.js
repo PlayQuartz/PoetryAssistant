@@ -23,11 +23,13 @@ const Rhymes = ({phonetic_dictionary}) => {
                 {
                     rhymingWords !== null ? Object.keys(rhymingWords).length > 0 ? Object.keys(rhymingWords).map((strength, index) => {return(
                         
-                            <div>
-                                <div>{strength} Phonemes</div>
-                                 {
+                            <div className='classes'>
+                                <div className='title'>{strength} Phonemes</div>
+                                <div className='words'>
+                                {
                                     rhymingWords[strength].map((word, index) => (<div key={index} className='word'>{word}</div>))
                                  }
+                                </div>
                             </div>
                         
                     

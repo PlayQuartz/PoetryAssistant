@@ -15,19 +15,22 @@ const getRhymes = (search_word, phonetic_dictionary) => {
         var current_word = dictionary_keys[x] // Current word being compared
         var current_word_phonetic = phonetic_dictionary[current_word].split(' ') // Split current word's phonetic into a list
         var current_word_phonetic_len = current_word_phonetic.length // Get number of phonemes in the current word
+        var amount_of_equal_phonemes = 1
         for(let y = 1; y <= Math.min(current_word_phonetic_len, word_phonetic_len); y++){ // Compare phonemes from the end of both words
             if(current_word_phonetic[current_word_phonetic_len-y].replace(/[012]/g, '') === word_phonetic[word_phonetic_len-y].replace(/[012]/g, '')){ // Check if phonemes match
-                if(y >= 2){ // Ensure at least two matching phonemes
-                    if (current_word !== word){ // Exclude the search word itself
-                        if(!rhyming_words[y]){
-                            rhyming_words[y] = []
-                        }
-                        rhyming_words[y].push(current_word)
-                    }
-                }
+                amount_of_equal_phonemes = y
             }
             else{
-                break // Stop comparison if phonemes don't match
+                break
+            }
+        }
+
+        if(amount_of_equal_phonemes >= 2){ 
+            if (current_word !== word){ 
+                if(!rhyming_words[amount_of_equal_phonemes]){
+                    rhyming_words[amount_of_equal_phonemes] = []
+                }
+                rhyming_words[amount_of_equal_phonemes].push(current_word)
             }
         }
     }

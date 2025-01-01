@@ -143,6 +143,17 @@ html, body, #root {
   gap: 10px;
   word-wrap: break-word;
 }
+.home-page .container .words .classes {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+.home-page .container .words .classes .title {
+  font-size: 25px;
+  padding: 10px 0;
+  border-bottom: 1px solid black;
+}
 .home-page .container .words .word {
   padding: 2px 5px;
   font-size: 20px;
