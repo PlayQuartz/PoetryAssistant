@@ -2,7 +2,7 @@ const getRhymes = (search_word, phonetic_dictionary) => {
 
     var word = search_word.toLowerCase() // Convert word to lowercase to match phonetic_dictionary keys
     var word_phonetic = phonetic_dictionary[word] // Retrieve phonetic representation of the word
-    var rhyming_words = {} // List to store rhyming words
+    var rhyming_words = {} // Dictionary to store rhyming words
     var dictionary_keys = Object.keys(phonetic_dictionary) // Get all words from phonetic_dictionary
 
     if(!word_phonetic){ // Return empty list if word is not in phonetic_dictionary
@@ -15,26 +15,24 @@ const getRhymes = (search_word, phonetic_dictionary) => {
         var current_word = dictionary_keys[x] // Current word being compared
         var current_word_phonetic = phonetic_dictionary[current_word].split(' ') // Split current word's phonetic into a list
         var current_word_phonetic_len = current_word_phonetic.length // Get number of phonemes in the current word
-        var amount_of_equal_phonemes = 1
+        var amount_of_equal_phonemes = 1 // Initialize the count of matching phonemes
         for(let y = 1; y <= Math.min(current_word_phonetic_len, word_phonetic_len); y++){ // Compare phonemes from the end of both words
             if(current_word_phonetic[current_word_phonetic_len-y].replace(/[012]/g, '') === word_phonetic[word_phonetic_len-y].replace(/[012]/g, '')){ // Check if phonemes match
-                amount_of_equal_phonemes = y
+                amount_of_equal_phonemes = y // Increment the count of matching phonemes
             }
             else{
                 break
             }
         }
-
-        if(amount_of_equal_phonemes >= 2){ 
+        if(amount_of_equal_phonemes >= 2){ // Add the current word to the rhyming group if it matches at least two phonemes and isn't the search word itself
             if (current_word !== word){ 
                 if(!rhyming_words[amount_of_equal_phonemes]){
-                    rhyming_words[amount_of_equal_phonemes] = []
+                    rhyming_words[amount_of_equal_phonemes] = [] // Initialize the group if it doesn't exist
                 }
-                rhyming_words[amount_of_equal_phonemes].push(current_word)
+                rhyming_words[amount_of_equal_phonemes].push(current_word) // Add the current word to the group
             }
         }
     }
-    console.log(rhyming_words)
     return rhyming_words 
 }
 
